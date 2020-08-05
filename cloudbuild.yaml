@@ -1,3 +1,9 @@
 steps:
-  - name: gcr.io/cloud-builders/gsutil
-    args: ["-m", "rsync", "-r", "-c", "-d", "./", "gs://serverless.blake.businesscredentials.info"]
+- name: node
+  entrypoint: npm
+  args: ['install']
+- name: node
+  entrypoint: npm
+  args: ['run', 'webpack']
+- name: gcr.io/cloud-builders/gsutil
+  args: ["-m", "rsync", "-r", "-c", "-d","-x","node_modules|.git", "./", "gs://serverless.blake.businesscredentials.info"]
