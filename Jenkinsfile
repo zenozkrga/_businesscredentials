@@ -4,6 +4,20 @@ def branch = env.BRANCH_NAME
 def dockerRegistry = ''
 def dockerBaseTag = "${dockerRegistry}"
 def dockerImageName = 'nameeelectricboogaloo'
-node {
-  echo "qwerty"
-}
+    stages {
+        stage('Build') { 
+            steps {
+                // 
+            }
+        }
+        stage('Test') { 
+            steps {
+                // 
+            }
+        }
+        stage('Deploy') { 
+            steps {
+                // 
+            }
+        }
+    }
