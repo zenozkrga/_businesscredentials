@@ -25,3 +25,4 @@ RUN apk add --no-cache --virtual .build-deps \
 FROM nginx:alpine as nginx
 WORKDIR /op/workspace
 COPY --from=builder /opt/workspace/src /usr/share/nginx/html
+COPY --from=builder /opt/workspace/ /usr/share/nginx/html
