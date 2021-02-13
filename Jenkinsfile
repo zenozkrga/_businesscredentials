@@ -3,21 +3,18 @@
 def branch = env.BRANCH_NAME
 def dockerRegistry = ''
 def dockerBaseTag = "${dockerRegistry}"
-def dockerImageName = 'nameeelectricboogaloo'
+def dockerImageName = 'html-server'
     stages {
         stage('Build') { 
             steps {
-                // 
-            }
-        }
-        stage('Test') { 
-            steps {
-                // 
-            }
-        }
-        stage('Deploy') { 
-            steps {
-                // 
+                def commitId = sh(returnStdout: true, script: 'git rev-parse --short HEAD')
+              commitId = commitId.trim()
+        dockerVersionTag = "${env.TIMESTAMP}-${commitId}"
+        dockerTag = "${dockerBaseTag}${dockerImageName}:${dockerVersionTag}"
+        {
+            sh """
+	    docker build --build-arg BRANCH=$branch -t $dockerTag .
+	    docker push $dockerTag"""   // 
             }
         }
     }
