@@ -5,6 +5,8 @@ WORKDIR /opt/workspace
 # Copy over Serverless components
 COPY package-lock.json package.json /opt/workspace/
 RUN apk update && apk upgrade &&  apk add ca-certificates && update-ca-certificates
+RUN curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+RUN sudo apt install nodejs
 RUN apk add --no-cache --virtual .build-deps \
     git \
     && npm install \
