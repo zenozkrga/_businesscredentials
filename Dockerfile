@@ -4,7 +4,7 @@ RUN mkdir -p /opt/workspace/src/js
 WORKDIR /opt/workspace
 # Copy over Serverless components
 COPY webpack.config.js package-lock.json package.json /opt/workspace/
-COPY . /opt/workspace/scr/
+COPY . /opt/workspace/src/
 RUN apk update && apk upgrade &&  apk add ca-certificates && update-ca-certificates
 RUN apk add --no-cache --virtual .build-deps \
     git \
