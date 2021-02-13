@@ -1,12 +1,11 @@
 
-FROM nginx:alpine as serverless
-RUN mkdir -p /opt/workspace/src/client
+FROM node:alpine as builder
+RUN mkdir -p /opt/workspace/src/js
 WORKDIR /opt/workspace
 # Copy over Serverless components
-COPY package-lock.json package.json /opt/workspace/
+COPY webpack.config.js package-lock.json package.json /opt/workspace/
+COPY . /opt/workspace/scr/
 RUN apk update && apk upgrade &&  apk add ca-certificates && update-ca-certificates
-RUN curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
-RUN sudo apt install nodejs
 RUN apk add --no-cache --virtual .build-deps \
     git \
     && npm install \
@@ -22,3 +21,7 @@ RUN apk add --no-cache --virtual .build-deps \
                 | sort -u \
     )" \
     && apk add --virtual .rundeps $runDeps
+
+FROM nginx:alpine as nginx
+WORKDIR /op/workspace
+COPY --from=builder /opt/workspace/src /usr/share/nginx/html
