@@ -1,5 +1,5 @@
 
-FROM node:dubnium-alpine as serverless
+FROM nginx:alpine as serverless
 RUN mkdir -p /opt/workspace/src/client
 WORKDIR /opt/workspace
 # Copy over Serverless components
