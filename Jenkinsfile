@@ -4,7 +4,7 @@ def branch = env.BRANCH_NAME
 def dockerRegistry = ''
 def dockerBaseTag = "${dockerRegistry}"
 def dockerImageName = 'html-server'
-node("") {
+node("Master") {
     stages {
         stage('Build') { 
             steps {
