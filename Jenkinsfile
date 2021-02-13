@@ -13,9 +13,7 @@ node("Master") {
         dockerVersionTag = "${env.TIMESTAMP}-${commitId}"
         dockerTag = "${dockerBaseTag}${dockerImageName}:${dockerVersionTag}"
         {
-            sh """
-	    docker build --build-arg BRANCH=$branch -t $dockerTag .
-	    docker push $dockerTag"""   // 
+            sh """ docker build --build-arg BRANCH=$branch -t $dockerTag ."""   
             }
         }
     }
