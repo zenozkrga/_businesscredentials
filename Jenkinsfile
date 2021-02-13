@@ -9,11 +9,11 @@ node("Master") {
         stage('Build') { 
             steps {
                 def commitId = sh(returnStdout: true, script: 'git rev-parse --short HEAD')
-              commitId = commitId.trim()
-        dockerVersionTag = "${env.TIMESTAMP}-${commitId}"
-        dockerTag = "${dockerBaseTag}${dockerImageName}:${dockerVersionTag}"
+                commitId = commitId.trim()
+                dockerVersionTag = "${env.TIMESTAMP}-${commitId}"
+                dockerTag = "${dockerBaseTag}${dockerImageName}:${dockerVersionTag}"
         {
-            sh """ docker build --build-arg BRANCH=$branch -t $dockerTag ."""   
+            sh """ docker build  -t $dockerTag ."""   
             }
         }
     }
