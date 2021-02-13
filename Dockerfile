@@ -8,10 +8,7 @@ RUN apk update && apk upgrade &&  apk add ca-certificates && update-ca-certifica
 RUN apk add --no-cache --virtual .build-deps \
     git \
     && npm install \
-    && npm install --save serverless-finch \
-    && npm install --save-dev serverless-dynamodb-pitr \
-    && npm install --save serverless-plugin-log-retention \
-	&& find /usr/local \
+  	&& find /usr/local \
         \( -type d -a -name test -o -name tests \) \
         -o \( -type f -a -name '*.pyc' -o -name '*.pyo' \) \
         -exec rm -rf '{}' + \
